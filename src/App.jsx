@@ -1,17 +1,20 @@
 import React from 'react';
 import { Col } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
 import Searcher from './components/Searcher';
 import PokemonList from './components/PokemonList';
-import PokeLogo from '/src/assets/images/logo.svg';
 import getPokemons from './fetch/getPokemons';
+import { setPokemons } from './actions/actions';
+import PokeLogo from '/src/assets/images/logo.svg';
 import './styles/App.css';
 
 function App() {
 
-  const [pokemons, setPokemons] = React.useState([]);
+  const pokemons = useSelector(state => state.pokemons);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    getPokemons(setPokemons);
+    getPokemons(dispatch);
   }, [])
 
   return (
