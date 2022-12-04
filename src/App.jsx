@@ -3,7 +3,7 @@ import { Col } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import Searcher from './components/Searcher';
 import PokemonList from './components/PokemonList';
-import getPokemons from './fetch/getPokemons';
+import { getPokemons } from './fetch/getPokemons';
 import { setPokemons } from './actions/actions';
 import PokeLogo from '/src/assets/images/logo.svg';
 import './styles/App.css';
@@ -14,8 +14,8 @@ function App() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    getPokemons(dispatch);
-  }, [])
+    getPokemons(dispatch, setPokemons);
+  }, []);
 
   return (
     <div className="App">
