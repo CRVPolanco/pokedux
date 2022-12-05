@@ -6,21 +6,24 @@ const getPokemonDetails = async (url) => {
     .catch(err => console.error(err));
 }
 
-export const getPokemons = async(dispatch, setPokemons) => {
+export const getPokemons = async () => {
 
   const response = await axios('https://pokeapi.co/api/v2/pokemon?limit=151');
   const data = await response.data.results;
 
-  const detailedInfo = await Promise.all(data.map(p => getPokemonDetails(p.url)));
-  const newData = [];
+  const newPokemonsArray = [];
+
+  const pokemonsDetailed = await Promise.all(
+    data.map((p) => getPokemonDetails(p.url))
+  );
 
   for(let i=0; i<data.length; i++){
-    newData.push({
+    newPokemonsArray.push({
       name: data[i].name,
-      image: detailedInfo[i].sprites.front_default,
-      types: detailedInfo[i].types.map(t => t.type.name)});
+      image: pokemonsDetailed[i].sprites.front_default,
+      types: pokemonsDetailed[i].types.map(t => t.type.name)});
   };
 
-  dispatch(setPokemons(newData));
+  return newPokemonsArray;
 }
 

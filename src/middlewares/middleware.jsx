@@ -10,7 +10,10 @@ export const featuring = (store) => (next) => (_action) => {
 };
 
 export const nameUpCase = (store) => (next) => (action) => {
-  const upName = [...action.action.payload];
+  console.log(action);
+  if(action.type !== 'SET_POKEMONS') return
+
+  const upName = [...action.payload];
 
   const replacedFirstLetter = upName.map(p => ({
     name: `${p.name.at(0).toUpperCase()}${p.name.substring(1, p.length)}`,
@@ -18,6 +21,6 @@ export const nameUpCase = (store) => (next) => (action) => {
     types: `${p.types.map(t => ` ${t.at(0).toUpperCase()}${t.substring(1, t.length)}`)}`.trim(),
   }));
 
-  const updatedActionInfo = {...action, action: {...action.action, payload: [...replacedFirstLetter]}};
+  const updatedActionInfo = {...action, payload: [...replacedFirstLetter]};
   next(updatedActionInfo);
-}
+};
