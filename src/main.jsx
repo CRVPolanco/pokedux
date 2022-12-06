@@ -5,7 +5,7 @@ import App from './App';
 import { applyMiddleware, compose, legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { pokemonsReducer } from './reducers/pokemons';
-import { nameUpCase, logger } from './middlewares/middleware';
+import { logger, nameUpCase } from './middlewares/middleware';
 import './styles/index.css';
 
 const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -14,7 +14,6 @@ function App() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(setLoading(true));
     dispatch(getPokemonsWithDetails());
   }, []);
 
@@ -26,12 +25,13 @@ function App() {
       <Col span={8} offset={8}>
         <Searcher />
       </Col>
-      {loading && (
-        <Col className='loader-container' offset={8} >
-          <p>Loading...</p>
-        </Col>
-      )}
-      {!loading && <PokemonList pokemons={pokemons} />}
+      {!!loading ?
+      <Col offset={12}>
+        <Spin spinning size="large" />
+      </Col>
+      :
+      <PokemonList pokemons={pokemons} />
+      }
     </div>
   )
 }

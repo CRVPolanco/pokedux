@@ -21,7 +21,10 @@ export const getPokemons = async () => {
     newPokemonsArray.push({
       name: data[i].name,
       image: pokemonsDetailed[i].sprites.front_default,
-      types: pokemonsDetailed[i].types.map(t => t.type.name)});
+      types: pokemonsDetailed[i].types.map(t => t.type.name),
+      id: pokemonsDetailed[i].id,
+      favorite: false,
+    })
   };
 
   return newPokemonsArray;
