@@ -2,7 +2,6 @@ import { SET_LOADING, SET_POKEMONS, ADD_FAVORITES } from '../actions/types';
 
 const initialState = {
   pokemons: [],
-  loading: false,
 }
 
 export const pokemonsReducer = (state = initialState, action) => {
@@ -11,19 +10,14 @@ export const pokemonsReducer = (state = initialState, action) => {
       return{ ...state, pokemons: [...action.payload] }
 
     case ADD_FAVORITES:
+      const pokeCopy = [...state.pokemons];
 
-      const pokemonsCopy = [...state.pokemons];
+      const index = pokeCopy.findIndex(p => p.id === action.payload.id);
+      if(index === -1) return state;
 
-      const currentPokemonIndex = pokemonsCopy.findIndex(p => p.id === action.payload.id);
-      if(currentPokemonIndex < 0) return state;
+      pokeCopy[index].favorite = !pokeCopy[index].favorite;
 
-      pokemonsCopy[currentPokemonIndex].favorite = !pokemonsCopy[currentPokemonIndex].favorite;
-
-      return { ...state, pokemons: pokemonsCopy };
-
-    case SET_LOADING:
-      return{ ...state, loading: action.payload }
-
+      return { ...state, pokemons: [...pokeCopy] };
     default:
       return state;
 

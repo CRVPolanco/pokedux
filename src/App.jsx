@@ -1,16 +1,16 @@
 import React from 'react';
 import { Col, Spin } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
+import { getPokemonsWithDetails } from './actions/actions';
 import Searcher from './components/Searcher';
 import PokemonList from './components/PokemonList';
-import { getPokemonsWithDetails, setLoading } from './actions/actions';
 import PokeLogo from '/src/assets/images/logo.svg';
 import './styles/App.css';
 
 function App() {
 
-  const pokemons = useSelector(state => state.pokemons);
-  const loading = useSelector(state => state.loading);
+  const pokemons = useSelector(state => state.data.pokemons);
+  const loading = useSelector(state => state.ui.loading);
   const dispatch = useDispatch();
 
   React.useEffect(() => {

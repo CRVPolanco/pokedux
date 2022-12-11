@@ -13,11 +13,7 @@ const PokemonCard = ({ name, image, types, id, favorite }) => {
   }
 
   return(
-    <Card style={{width: "240px"}}
-    title={name}
-    cover={<img src={image} alt={name} />}
-    extra={<StarButton isFavorite={favorite} handleClick={handleClick} />}
-    >
+    <Card style={{width: "240px"}} title={name} cover={<img src={image} alt={name} />} extra={<StarButton isFavorite={favorite} handleClick={handleClick} />}>
       <Meta description={types}/>
     </Card>
   )
